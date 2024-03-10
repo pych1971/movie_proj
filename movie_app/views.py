@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.db.models import F
+from django.db.models import F, Sum, Max, Min, Count, Avg
 from .models import Movie
 
 
@@ -7,8 +7,11 @@ from .models import Movie
 
 def show_all_movie(request):
     movies = Movie.objects.order_by(F('year').asc(nulls_last=True), 'rating')
+    agg = movies.aggregate(Avg('budget'), Max('rating'), Min('rating'), Count('id'))
     return render(request, 'movie_app/all_movies.html', {
-        'movies': movies
+        'movies': movies,
+        'agg': agg,
+        'total': movies.count()
     })
 
 
