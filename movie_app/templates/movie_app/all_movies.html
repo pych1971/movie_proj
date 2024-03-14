@@ -10,7 +10,7 @@
         <li><a href="{{ movie.get_url }}">{{ movie.name }}</a>,
             рейтинг - {{ movie.rating }},
             бюджет - {{ movie.budget }},
-            год - {{ movie.year|default:"Неизвестен" }},
+            год - {{ movie.year|default:"Неизвестен" }}
         </li>
         {% endfor %}
     </ul>
